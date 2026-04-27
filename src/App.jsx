@@ -24,7 +24,16 @@ function App() {
 
       <ul>
         {todos.map((todo, index) => (
-          <li key={index}>{todo}</li>
+          <li key={index}>
+            {todo}
+            <button
+              onClick={() => {
+                setTodos(todos.filter((_, i) => i !== index));
+              }}
+            >
+              Delete
+            </button>
+          </li>
         ))}
       </ul>
     </div>
