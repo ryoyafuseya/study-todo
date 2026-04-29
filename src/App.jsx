@@ -26,9 +26,25 @@ function App() {
       </button>
 
       <ul>
-        {todos.map((todo, index) => (
+        {todos.map((todo) => (
           <li key={todo.id}>
-            {todo.text}
+            <input
+              type="checkbox"
+              checked={todo.done}
+              onChange={() => {
+                setTodos(
+                  todos.map(t => 
+                    t.id === todo.id 
+                    ? { ...t, done: !t.done }
+                    : t
+                  )
+                );
+              }}
+            />
+            
+            <span>{todo.text}</span>
+
+
             <button
               onClick={() => {
                 setTodos(todos.filter(t => t.id !== todo.id));
