@@ -16,19 +16,38 @@ function App() {
       <button
         onClick={() => {
           if (input === "") return;
-          setTodos([...todos, input]);
+          setTodos([
+            ...todos, 
+            { id: Date.now(), text: input, done: false }
+          ]);
         }}
       >
         Add
       </button>
 
       <ul>
-        {todos.map((todo, index) => (
-          <li key={index}>
-            {todo}
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            <input
+              type="checkbox"
+              checked={todo.done}
+              onChange={() => {
+                setTodos(
+                  todos.map(t => 
+                    t.id === todo.id 
+                    ? { ...t, done: !t.done }
+                    : t
+                  )
+                );
+              }}
+            />
+            
+            <span>{todo.text}</span>
+
+
             <button
               onClick={() => {
-                setTodos(todos.filter((_, i) => i !== index));
+                setTodos(todos.filter(t => t.id !== todo.id));
               }}
             >
               Delete
