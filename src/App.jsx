@@ -16,7 +16,10 @@ function App() {
       <button
         onClick={() => {
           if (input === "") return;
-          setTodos([...todos, input]);
+          setTodos([
+            ...todos, 
+            { id: Date.now(), text: input, done: false }
+          ]);
         }}
       >
         Add
@@ -24,11 +27,11 @@ function App() {
 
       <ul>
         {todos.map((todo, index) => (
-          <li key={index}>
-            {todo}
+          <li key={todo.id}>
+            {todo.text}
             <button
               onClick={() => {
-                setTodos(todos.filter((_, i) => i !== index));
+                setTodos(todos.filter(t => t.id !== todo.id));
               }}
             >
               Delete
