@@ -42,7 +42,13 @@ function App() {
               }}
             />
             
-            <span>{todo.text}</span>
+            <span
+              style={{
+                textDecoration: todo.done ? "line-through" : "none"
+              }}
+            >
+              {todo.text}
+            </span>
 
 
             <button
